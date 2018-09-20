@@ -35,10 +35,6 @@ app.post("/mail", (req, res) => {
   var how = "";
   
   const msg = {
-      to: "deepak.kadarivel@gmail.com",
-      from: "test@zinclearninglabs.com",
-      subject: "Signup for a demo request.",
-      text: "A new user has requested for a demo.",
       html: "<strong>First name</strong>" + firstName + "</br>" +
       "<strong>Last name: </strong>" + lastName + "</br>" +
       "<strong>Email: </strong>" + email + "</br>" +
@@ -55,6 +51,7 @@ app.post("/mail", (req, res) => {
 
 function sendMail(data) {
     console.log('Starting mail server');
+    console.log(data.html);
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -66,8 +63,9 @@ function sendMail(data) {
       var mailOptions = {
         from: 'zinclabtest@gmail.com',
         to: 'zinclabtest@gmail.com',
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!',
+        subject: 'SSignup demo request.',
+        text: 'A new user has requested for a signup demo.',
+        html: data.html
       };
       
       transporter.sendMail(mailOptions, function(error, info){
